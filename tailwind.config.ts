@@ -11,6 +11,7 @@ const config: Config = {
             backgroundColor: {
                 'cool-gray': 'var(--background-color)',
             },
+
             colors: {
                 'accent-color': 'var(--accent-color)',
                 'font-gray': 'var(--font-gray)',
@@ -18,6 +19,19 @@ const config: Config = {
             },
             fontFamily: {
                 sans: ['Helvetica Neue'],
+            },
+            animation: {
+                wiggle: 'wiggle 120s linear',
+            },
+            keyframes: {
+                wiggle: {
+                    '0%': {
+                        width: '100%',
+                    },
+                    '100%': {
+                        width: '0%',
+                    },
+                },
             },
         },
     },
