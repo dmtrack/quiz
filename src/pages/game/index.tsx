@@ -9,7 +9,7 @@ import { useCities } from '@/hooks/useCities';
 import { useAppDispatch, useAppSelector } from '@/store/useRedux';
 import { useEffect } from 'react';
 import { citySlice } from '@/store/slices/citySlice';
-import GameOver from '@/components/GameOver/gameOver';
+import GameOver from '@/components/GameOver/GameOver';
 
 const GamePage = () => {
     const dispatch = useAppDispatch();

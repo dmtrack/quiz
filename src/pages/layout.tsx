@@ -2,10 +2,12 @@ export interface LayoutProps {
     children: React.ReactNode;
 }
 
-export const RootLayout = ({ children }: LayoutProps) => {
+const RootLayout = ({ children }: LayoutProps) => {
     return (
         <section className='flex items-center justify-center h-screen w-full font-sans bg-cool-gray text-font-gray '>
             {children}
         </section>
     );
 };
+
+export default RootLayout;
