@@ -1,4 +1,3 @@
-import { useAppSelector } from '@/store/useRedux';
 import { useRouter } from 'next/router';
 
 export interface HeaderProps {

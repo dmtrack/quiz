@@ -8,7 +8,7 @@ interface ICitySlice {
     gameIsStarted: boolean;
     firstTry: boolean;
     timer: number;
-    value: string;
+    result: 'draw' | 'playerwin' | 'playerlose';
 }
 
 const initialState: ICitySlice = {
@@ -19,7 +19,7 @@ const initialState: ICitySlice = {
     gameIsStarted: false,
     firstTry: true,
     timer: Date.now() + 60 * 2 * 1000,
-    value: '',
+    result: 'draw',
 };
 
 export const citySlice = createSlice({
@@ -44,18 +44,17 @@ export const citySlice = createSlice({
             state.playerTurn = true;
             state.firstTry = true;
         },
-
+        setResult: (state, { payload }) => {
+            state.result = payload;
+        },
         gameIsOver: (state) => {
             state.gameIsOver = true;
             state.timer = Date.now() + 60 * 2 * 1000;
-            state.usedCities = [];
         },
         resetTimer: (state) => {
             state.timer = Date.now() + 60 * 2 * 1000;
         },
-        setValue: (state, { payload }) => {
-            state.value = payload;
-        },
+
         setFirstTry: (state, { payload }) => {
             state.firstTry = payload;
         },

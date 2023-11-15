@@ -1,11 +1,15 @@
 import { Button } from '@/components/Button/Button';
 import { Title } from '@/components/Title/Title';
+import { citySlice } from '@/store/slices/citySlice';
+import { useAppDispatch } from '@/store/useRedux';
 import { useRouter } from 'next/router';
 
 const Home = () => {
+    const dispatch = useAppDispatch();
+
     const router = useRouter();
-    const isGame = router.route.includes('game');
     const onclick = () => {
+        dispatch(citySlice.actions.setGameStarted());
         router.push('/game');
     };
 
@@ -14,7 +18,7 @@ const Home = () => {
             className='flex flex-col items-center shrink-0 bg-accent-color
              max-w-xl grow h-[347px] box-border bg-white rounded-2xl
               shadow gap-3'>
-            <Title isGame={isGame} title='Игра в города на время' />
+            <Title title='Игра в города на время' />
             <div
                 className='flex flex-col h-full justify-between  items-center mx-6 my-6 gap-6 
                     box-content text-sm leading-[21px]

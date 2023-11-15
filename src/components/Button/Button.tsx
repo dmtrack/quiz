@@ -1,7 +1,7 @@
 export interface ButtonProps {
     title: string;
     action: () => void;
-    isDisabled: boolean;
+    isDisabled?: boolean;
 }
 
 export const Button = ({ title, action, isDisabled = false }: ButtonProps) => {

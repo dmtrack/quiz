@@ -6,10 +6,16 @@ import Countdown from 'react-countdown';
 
 export const Timer = () => {
     const dispatch = useAppDispatch();
-    const { timer } = useAppSelector((state) => state.cities);
+    const { timer, playerTurn } = useAppSelector((state) => state.cities);
 
     const setGameOver = () => {
-        dispatch(citySlice.actions.gameIsOver());
+        if (playerTurn) {
+            dispatch(citySlice.actions.setResult('playerlose'));
+            dispatch(citySlice.actions.gameIsOver());
+        } else {
+            dispatch(citySlice.actions.setResult('playerwin'));
+            dispatch(citySlice.actions.gameIsOver());
+        }
     };
 
     const renderFunc = ({

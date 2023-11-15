@@ -59,6 +59,7 @@ export const InputPanel = () => {
             setValue('');
             dispatch(citySlice.actions.nextTurn());
             dispatch(citySlice.actions.addItem(checkedValue));
+            dispatch(citySlice.actions.resetTimer());
             dispatch(citySlice.actions.setFirstTry(false));
         }
         const computerCity = await computerTurn(value, cities);

@@ -54,8 +54,6 @@ export const findCity = async (value: string, cities: string[]) => {
     let resultCloud;
     const lastChar = await getLastChar(value);
 
-    console.log(lastChar, 'lastChar');
-
     if (lastChar) {
         resultCloud =
             (await cities) &&

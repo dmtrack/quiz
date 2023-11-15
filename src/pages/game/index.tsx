@@ -9,11 +9,17 @@ import { useCities } from '@/hooks/useCities';
 import { useAppDispatch, useAppSelector } from '@/store/useRedux';
 import { useEffect } from 'react';
 import { citySlice } from '@/store/slices/citySlice';
+import GameOver from '@/components/GameOver/gameOver';
 
 const GamePage = () => {
     const dispatch = useAppDispatch();
 
-    const { playerTurn, usedCities } = useAppSelector((state) => state.cities);
+    const { playerTurn, usedCities, gameIsOver } = useAppSelector(
+        (state) => state.cities
+    );
+
+    const count = usedCities.length;
+    const lastCity = usedCities[count - 1];
 
     useEffect(() => {
         dispatch(citySlice.actions.fetchAllCities(moke));
@@ -24,7 +30,7 @@ const GamePage = () => {
         ? 'Сейчас ваша очередь'
         : 'Сейчас очередь соперника';
 
-    return (
+    return !gameIsOver ? (
         <section
             className='flex flex-col items-center
       grow shrink-0 max-w-xl min-h-[464px] max-h-[600px]  bg-white rounded-2xl
@@ -43,7 +49,7 @@ const GamePage = () => {
 
             <article className='flex flex-col grow w-full'>
                 {!useCities.length ? (
-                    <div className='flex items-center justify-center w-full px-6 text-sm leading-[21px] text-gray-400'>
+                    <div className='flex w-full px-6  items-center justify-center  text-sm leading-[21px] text-gray-400'>
                         Первый участник вспоминает города...
                     </div>
                 ) : (
@@ -55,6 +61,8 @@ const GamePage = () => {
                 <InputPanel />
             </article>
         </section>
+    ) : (
+        <GameOver count={count} lastCity={lastCity} />
     );
 };
 
