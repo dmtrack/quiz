@@ -38,16 +38,17 @@ export const citySlice = createSlice({
             state.playerTurn = !state.playerTurn;
         },
         setGameStarted: (state) => {
+            state.gameIsOver = false;
             state.gameIsStarted = true;
+            state.timer = Date.now() + 60 * 2 * 1000;
+            state.playerTurn = true;
+            state.firstTry = true;
         },
 
         gameIsOver: (state) => {
             state.gameIsOver = true;
             state.timer = Date.now() + 60 * 2 * 1000;
-            state.gameIsStarted = false;
-            state.firstTry = true;
             state.usedCities = [];
-            state.playerTurn = true;
         },
         resetTimer: (state) => {
             state.timer = Date.now() + 60 * 2 * 1000;

@@ -1,42 +1,41 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface CitiesListProps {
     cities?: string[];
 }
 
 export const CitiesList = ({ cities }: CitiesListProps) => {
-    const citiesEndRef = useRef<null | HTMLLIElement>(null);
-    console.log(cities, 'citiesEndRef');
+    const citiesEndRef = useRef<null | HTMLDivElement>(null);
+    // console.log(cities, 'citiesEndRef');
     useEffect(() => {
         citiesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [cities]);
 
     return (
         <>
-            <ul className='p-4 flex flex-col items-start gap-y-2 overflow-y-hidden h-full'>
+            <div className='flex flex-col w-full h-[300px] p-4 items-start gap-y-3 overflow-y-hidden '>
                 {cities?.map((city, index, arr) =>
                     index === arr.length - 1 ? (
-                        <li
+                        <div
                             key={city}
                             ref={citiesEndRef}
                             className='odd:text-white even:bg-gray-200 odd:bg-accent-color 
-                 even:text-gray-700 px-3 py-2 rounded-xl even:mr-auto odd:ml-auto even:rounded-bl-none odd:rounded-br-none'>
+                 even:text-gray-700 px-3 py-2 rounded-xl odd:mr-auto even:ml-auto even:rounded-bl-none odd:rounded-br-none'>
                             {city}
-                        </li>
+                        </div>
                     ) : (
-                        <li
+                        <div
                             key={city}
                             className='odd:text-white even:bg-gray-200 odd:bg-accent-color 
-                 even:text-gray-700 px-3 py-2 rounded-xl even:mr-auto odd:ml-auto even:rounded-bl-none odd:rounded-br-none'>
+                 even:text-gray-700 px-3 py-2 rounded-xl odd:mr-auto even:ml-auto even:rounded-bl-none odd:rounded-br-none'>
                             {city}
-                        </li>
+                        </div>
                     )
                 )}
-            </ul>
-            <p className='text-sm text-gray-400 text-center'>{`Всего перечислено городов: ${
+            </div>
+            <p className='flex self-center text-sm text-gray-400'>{`Всего перечислено городов: ${
                 cities && cities.length
             }`}</p>
         </>

@@ -1,22 +1,31 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { SendIcon } from '@/assets/icons/SendIcon';
 import { useCities } from '@/hooks/useCities';
 import { useAppDispatch, useAppSelector } from '@/store/useRedux';
 import { citySlice } from '@/store/slices/citySlice';
-import { findCity } from '@/utils/helpers';
 
 export const InputPanel = () => {
     const [error, setError] = useState<string>('');
     const [value, setValue] = useState<string>('');
-    const { lastChar, cities, hasCity, checkedValue } = useCities(value);
-    const { playerTurn, firstTry } = useAppSelector((state) => state.cities);
+    const { lastChar, cities, hasCity, checkedValue, computerTurn } =
+        useCities(value);
+    const { playerTurn, firstTry, usedCities } = useAppSelector(
+        (state) => state.cities
+    );
     const dispatch = useAppDispatch();
+
+    const inputRef = useRef<null | HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (inputRef.current != null && playerTurn) {
+            inputRef.current.focus();
+        }
+    }, [playerTurn]);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(checkedValue, 'checkedValue');
 
         if (!hasCity) {
             setError('Введите другое название');
@@ -26,33 +35,38 @@ export const InputPanel = () => {
 
         if (!firstTry) {
             let firstChar = checkedValue[0].toLowerCase();
-            const lastCity = cities[cities.length - 1];
-            let lastCityChar = lastCity[lastCity.length - 1];
-            if (['ь', 'ъ', 'ы'].includes(lastCityChar)) {
-                lastCityChar = lastCity[lastCity.length - 2];
+            const lastCity = usedCities[usedCities.length - 1];
+            let lastChar = lastCity.slice(-1);
+
+            if (
+                lastChar === 'ь' ||
+                lastChar === 'ъ' ||
+                lastChar === 'ы' ||
+                lastChar === 'й'
+            ) {
+                lastChar = lastCity.slice(-2, -1);
             }
-            if (lastCityChar === firstChar) {
-                dispatch(citySlice.actions.addItem(checkedValue));
+            if (lastChar === firstChar) {
                 setValue('');
+                dispatch(citySlice.actions.nextTurn());
+                dispatch(citySlice.actions.addItem(checkedValue));
             } else {
-                setError(`Город должен начинаться на букву "${lastCityChar}"`);
+                setError(`Город должен начинаться на букву "${lastChar}"`);
                 setValue('');
                 return;
             }
         } else {
+            setValue('');
+            dispatch(citySlice.actions.nextTurn());
             dispatch(citySlice.actions.addItem(checkedValue));
+            dispatch(citySlice.actions.setFirstTry(false));
         }
+        const computerCity = await computerTurn(value, cities);
 
-        dispatch(citySlice.actions.resetTimer());
-        setError('');
-        setValue('');
-
-        const newCity = await findCity(checkedValue);
-        if (!newCity) return;
-        dispatch(citySlice.actions.addItem(checkedValue));
-        dispatch(citySlice.actions.resetTimer());
-        dispatch(citySlice.actions.nextTurn());
-        dispatch(citySlice.actions.setFirstTry(false));
+        if (computerCity) {
+            setError('');
+            setValue('');
+        }
     };
 
     return (
@@ -76,6 +90,7 @@ export const InputPanel = () => {
                     onChange={(e) => setValue(e.target.value)}
                     value={value}
                     disabled={!playerTurn}
+                    ref={inputRef}
                 />
                 <button
                     className='p-[6px] text-white  rounded disabled:bg-gray-400 hover:opacity-80 transition-all bg-accent-color'

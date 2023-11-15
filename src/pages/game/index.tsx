@@ -7,8 +7,7 @@ import { Title } from '@/components/Title/Title';
 import { cities as moke } from '@/utils/cities';
 import { useCities } from '@/hooks/useCities';
 import { useAppDispatch, useAppSelector } from '@/store/useRedux';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { citySlice } from '@/store/slices/citySlice';
 
 const GamePage = () => {
@@ -18,9 +17,8 @@ const GamePage = () => {
 
     useEffect(() => {
         dispatch(citySlice.actions.fetchAllCities(moke));
+        dispatch(citySlice.actions.setGameStarted());
     }, []);
-
-    console.log('render gamePage');
 
     let gameTitle = playerTurn
         ? 'Сейчас ваша очередь'
@@ -43,7 +41,7 @@ const GamePage = () => {
                 </section>
             </article>
 
-            <article className='flex grow w-full'>
+            <article className='flex flex-col grow w-full'>
                 {!useCities.length ? (
                     <div className='flex items-center justify-center w-full px-6 text-sm leading-[21px] text-gray-400'>
                         Первый участник вспоминает города...
