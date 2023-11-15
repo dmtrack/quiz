@@ -12,7 +12,7 @@ This is test task for the company
 
 ## Stack
 
--   react
+-   next
 -   typescript
 -   redux & toolkit
 -   RTK-query
