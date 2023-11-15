@@ -8,12 +8,12 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            backgroundImage: {
-                'background-color': 'var(--background-color)',
+            backgroundColor: {
+                'cool-gray': 'var(--background-color)',
             },
             colors: {
                 'accent-color': 'var(--accent-color)',
-                'font-gray': 'var(--font-color)',
+                'font-gray': 'var(--font-gray)',
                 'shadow-base': 'var(--shadow-base)',
             },
             fontFamily: {
