@@ -12,7 +12,7 @@ export default function Home() {
         <section className='flex items-center justify-center h-screen w-full font-sans'>
             <div
                 className='flex flex-col items-center shrink-0 bg-accent-color
-             max-w-xl grow h-[385px] box-border bg-white rounded-2xl
+             max-w-xl grow h-[347px] box-border bg-white rounded-2xl
               shadow gap-3'>
                 <Header title='Игра в города на время' />
                 <div

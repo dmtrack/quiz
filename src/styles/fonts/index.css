@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Helvetica';
+    src: url('./helveticaneue.woff2') format('woff2'),
+        url('./helveticaneue.woff') format('woff');
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+}

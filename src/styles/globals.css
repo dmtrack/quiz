@@ -12,7 +12,6 @@
 }
 
 body {
-    border: none;
     color: var(--font-gray);
     background: var(--cool-gray-200, #e5e7eb);
 }
