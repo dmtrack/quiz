@@ -14,10 +14,7 @@ const Home = () => {
     };
 
     return (
-        <div
-            className='flex flex-col items-center shrink-0 bg-accent-color
-             max-w-xl grow h-[347px] box-border bg-white rounded-2xl
-              shadow gap-3'>
+        <div className='flex flex-col w-[576px] items-center rounded-2xl bg-white'>
             <Title title='Игра в города на время' />
             <div
                 className='flex flex-col h-full justify-between  items-center mx-6 my-6 gap-6 
