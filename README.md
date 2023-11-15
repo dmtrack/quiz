@@ -2,7 +2,7 @@
 
 This is test task for the company
 
-[deploy link](https://edem-app-liard.vercel.app)
+[deploy link](https://quiz-five-delta.vercel.app)
 
 ## Preview
 

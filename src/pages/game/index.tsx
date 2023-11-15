@@ -24,7 +24,7 @@ const GamePage = () => {
     useEffect(() => {
         dispatch(citySlice.actions.fetchAllCities(moke));
         dispatch(citySlice.actions.setGameStarted());
-    }, []);
+    }, [dispatch]);
 
     let gameTitle = playerTurn
         ? 'Сейчас ваша очередь'
