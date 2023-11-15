@@ -1,27 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { citySlice } from '@/store/slices/citySlice';
+import { useAppDispatch, useAppSelector } from '@/store/useRedux';
 import Countdown from 'react-countdown';
 
-export interface CounterProps {
-    setTimerEnd: React.Dispatch<React.SetStateAction<boolean>>;
-    newTimer?: boolean;
-}
+export const Timer = () => {
+    const dispatch = useAppDispatch();
+    const { timer } = useAppSelector((state) => state.cities);
 
-export const Timer = ({ setTimerEnd, newTimer }: CounterProps) => {
-    const [timer, setTimer] = useState<number>(Date.now() + 60 * 2 * 1000);
-
-    useEffect(() => {
-        if (newTimer) {
-            setTimer(Date.now() + 60 * 2 * 1000);
-        }
-    }, [newTimer]);
-
-    const setTimerOver = () => {
-        setTimerEnd(true);
-        setTimer(Date.now() + 60 * 2 * 1000);
+    const setGameOver = () => {
+        dispatch(citySlice.actions.gameIsOver());
     };
-    console.log('render timer');
 
     const renderFunc = ({
         minutes,
@@ -42,7 +31,7 @@ export const Timer = ({ setTimerEnd, newTimer }: CounterProps) => {
             <Countdown
                 date={timer}
                 renderer={renderFunc}
-                onComplete={setTimerOver}
+                onComplete={setGameOver}
             />
         </div>
     );

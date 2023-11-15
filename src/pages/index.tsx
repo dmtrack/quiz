@@ -2,7 +2,7 @@ import { Button } from '@/components/Button/Button';
 import { Title } from '@/components/Title/Title';
 import { useRouter } from 'next/router';
 
-export default function Home() {
+const Home = () => {
     const router = useRouter();
     const isGame = router.route.includes('game');
     const onclick = () => {
@@ -46,4 +46,6 @@ export default function Home() {
             </div>
         </div>
     );
-}
+};
+
+export default Home;
