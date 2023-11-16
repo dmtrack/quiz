@@ -49,6 +49,7 @@ export const InputPanel = () => {
             if (lastChar === firstChar) {
                 setValue('');
                 dispatch(citySlice.actions.nextTurn());
+                dispatch(citySlice.actions.resetTimer());
                 dispatch(citySlice.actions.addItem(checkedValue));
             } else {
                 setError(`Город должен начинаться на букву "${lastChar}"`);
