@@ -61,7 +61,8 @@ export const findCity = async (value: string, cities: string[]) => {
                 return city.toLowerCase().startsWith(lastChar);
             });
     }
-
+    console.log(lastChar);
+    console.log(resultCloud);
     return resultCloud && resultCloud[randomIndex(resultCloud?.length)];
 };
 
