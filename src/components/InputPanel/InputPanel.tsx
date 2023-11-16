@@ -4,14 +4,14 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { SendIcon } from '@/assets/icons/SendIcon';
 import { useCities } from '@/hooks/useCities';
 import { useAppDispatch, useAppSelector } from '@/store/useRedux';
-import { citySlice } from '@/store/slices/citySlice';
+import { citySlice, gameIsOver } from '@/store/slices/citySlice';
 
 export const InputPanel = () => {
     const [error, setError] = useState<string>('');
     const [value, setValue] = useState<string>('');
     const { lastChar, cities, hasCity, checkedValue, computerTurn } =
         useCities(value);
-    const { playerTurn, firstTry, usedCities } = useAppSelector(
+    const { playerTurn, firstTry, usedCities, gameIsOver } = useAppSelector(
         (state) => state.cities
     );
     const dispatch = useAppDispatch();
@@ -62,7 +62,7 @@ export const InputPanel = () => {
             dispatch(citySlice.actions.resetTimer());
             dispatch(citySlice.actions.setFirstTry(false));
         }
-        const computerCity = await computerTurn(value, cities);
+        const computerCity = await computerTurn(value, cities, gameIsOver);
 
         if (computerCity) {
             setError('');

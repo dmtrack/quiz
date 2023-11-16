@@ -6,14 +6,18 @@ import Countdown from 'react-countdown';
 
 export const Timer = () => {
     const dispatch = useAppDispatch();
-    const { timer, playerTurn } = useAppSelector((state) => state.cities);
+    const { timer, playerTurn, result, firstTry } = useAppSelector(
+        (state) => state.cities
+    );
 
     const setGameOver = () => {
-        if (playerTurn) {
+        if (playerTurn && !firstTry) {
             dispatch(citySlice.actions.setResult('playerlose'));
             dispatch(citySlice.actions.gameIsOver());
-        } else {
+        } else if (!playerTurn && !firstTry) {
             dispatch(citySlice.actions.setResult('playerwin'));
+            dispatch(citySlice.actions.gameIsOver());
+        } else {
             dispatch(citySlice.actions.gameIsOver());
         }
     };

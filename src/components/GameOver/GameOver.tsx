@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
-import { useAppSelector } from '@/store/useRedux';
+import { useAppDispatch, useAppSelector } from '@/store/useRedux';
 import { Button } from '@/components/Button/Button';
+import { citySlice } from '@/store/slices/citySlice';
 
 interface GameOverProps {
     count: number;
@@ -9,9 +10,11 @@ interface GameOverProps {
 
 const GameOver = ({ count, lastCity }: GameOverProps) => {
     const { result, gameIsStarted } = useAppSelector((state) => state.cities);
+    const dispatch = useAppDispatch();
 
     const router = useRouter();
     const onclick = () => {
+        dispatch(citySlice.actions.restart());
         router.push('/');
     };
 
