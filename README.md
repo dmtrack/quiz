@@ -2,7 +2,7 @@
 
 This is test task for the company
 
-[deploy link](https://quiz-psi-dusky.vercel.app)
+[deploy link](https://quiz-theta-seven.vercel.app/)
 
 ## Preview
 
