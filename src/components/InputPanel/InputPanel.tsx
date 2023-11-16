@@ -4,14 +4,14 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { SendIcon } from '@/assets/icons/SendIcon';
 import { useCities } from '@/hooks/useCities';
 import { useAppDispatch, useAppSelector } from '@/store/useRedux';
-import { citySlice, gameIsOver } from '@/store/slices/citySlice';
+import { citySlice } from '@/store/slices/citySlice';
 
 export const InputPanel = () => {
     const [error, setError] = useState<string>('');
     const [value, setValue] = useState<string>('');
     const { lastChar, cities, hasCity, checkedValue, computerTurn } =
         useCities(value);
-    const { playerTurn, firstTry, usedCities, gameIsOver } = useAppSelector(
+    const { playerTurn, firstTry, usedCities } = useAppSelector(
         (state) => state.cities
     );
     const dispatch = useAppDispatch();
