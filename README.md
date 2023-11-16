@@ -15,5 +15,4 @@ This is test task for the company
 -   next
 -   typescript
 -   redux & toolkit
--   RTK-query
 -   tailwind
