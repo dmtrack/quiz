@@ -18,7 +18,7 @@ const initialState: ICitySlice = {
     gameIsOver: false,
     gameIsStarted: false,
     firstTry: true,
-    timer: Date.now() + 60 * 2 * 1000,
+    timer: Date.now() + 6000,
     result: 'draw',
 };
 
@@ -40,7 +40,7 @@ export const citySlice = createSlice({
         setGameStarted: (state) => {
             state.gameIsOver = false;
             state.gameIsStarted = true;
-            state.timer = Date.now() + 60 * 2 * 1000;
+            state.timer = Date.now() + 4000;
             state.playerTurn = true;
             state.firstTry = true;
         },
@@ -53,10 +53,10 @@ export const citySlice = createSlice({
         },
         gameIsOver: (state) => {
             state.gameIsOver = true;
-            state.timer = Date.now() + 60 * 2 * 1000;
+            state.timer = Date.now() + 4000;
         },
         resetTimer: (state) => {
-            state.timer = Date.now() + 60 * 2 * 1000;
+            state.timer = Date.now() + 4000;
         },
 
         setFirstTry: (state, { payload }) => {

@@ -8,13 +8,9 @@ export const useCities = (value: string) => {
     const lastChar = getLastChar(usedCities);
     const checkedValue = value && validateCityName(value);
 
-    const computerTurn = async (
-        value: string,
-        cities: string[],
-        gameIsOver: boolean
-    ) => {
+    const computerTurn = async (value: string, cities: string[]) => {
         const getCity = await findCity(value, cities);
-        if (getCity && !gameIsOver) {
+        if (getCity) {
             dispatch(citySlice.actions.nextTurn());
             dispatch(citySlice.actions.addItem(getCity));
             dispatch(citySlice.actions.resetTimer());

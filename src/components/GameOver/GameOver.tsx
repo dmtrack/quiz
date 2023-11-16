@@ -9,7 +9,9 @@ interface GameOverProps {
 }
 
 const GameOver = ({ count, lastCity }: GameOverProps) => {
-    const { result, gameIsStarted } = useAppSelector((state) => state.cities);
+    const { result, gameIsStarted, gameIsOver } = useAppSelector(
+        (state) => state.cities
+    );
     const dispatch = useAppDispatch();
 
     const router = useRouter();

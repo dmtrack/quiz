@@ -62,8 +62,7 @@ export const InputPanel = () => {
             dispatch(citySlice.actions.resetTimer());
             dispatch(citySlice.actions.setFirstTry(false));
         }
-        const computerCity = await computerTurn(value, cities, gameIsOver);
-
+        const computerCity = await computerTurn(value, cities);
         if (computerCity) {
             setError('');
             setValue('');
